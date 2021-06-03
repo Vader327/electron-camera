@@ -6,7 +6,7 @@ var video = document.getElementById('camera')
 var flash = document.getElementById('flash')
 var url = ""
 
-navigator.mediaDevices.getUserMedia({video: true})
+navigator.mediaDevices.getUserMedia({video: { facingMode: "user" }})
 .then(function(stream){
   video.srcObject = stream;
 }).catch((err)=>{
@@ -30,6 +30,7 @@ function take_img(){
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   ctx.drawImage(video, 0,0);
+  
   return new Promise((res, rej)=>{
     canvas.toBlob(res);
   });
